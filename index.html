@@ -619,6 +619,15 @@ h2 .g{background:var(--grad-num);-webkit-background-clip:text;background-clip:te
 .sv-shine2{position:absolute;left:50%;top:50%;width:560px;height:560px;margin:-280px 0 0 -280px;pointer-events:none;overflow:hidden;-webkit-mask:url(img/entech-badge-hex.webp) center/contain no-repeat;mask:url(img/entech-badge-hex.webp) center/contain no-repeat;animation:bob 6s ease-in-out infinite}
 .sv-shine2::after{content:"";position:absolute;top:-20%;left:-60%;width:30%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.45),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out 1s infinite}
 @media (prefers-reduced-motion:reduce){.qr-scan{display:none}}
+
+.sv-bw{position:relative;width:560px;animation:bob 6s ease-in-out infinite;will-change:transform}
+.sv-bw .sv-badge{display:block;width:100%!important;animation:none!important}
+.sv-shine3{position:absolute;inset:0;pointer-events:none;overflow:hidden;clip-path:polygon(50% 2%,93% 25%,93% 75%,50% 98%,7% 75%,7% 25%);-webkit-clip-path:polygon(50% 2%,93% 25%,93% 75%,50% 98%,7% 75%,7% 25%)}
+.sv-shine3::after{content:"";position:absolute;top:-20%;left:-60%;width:30%;height:140%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:shine 4.5s ease-in-out 1s infinite}
+.sv-shine2{display:none}
+.cv{align-items:center;text-align:center}
+.cv b{white-space:nowrap}
+.glhint{display:none}
 </style>
 </head>
 <body>
@@ -907,8 +916,7 @@ TIERS.forEach(t=>{
 add("service","Warranty & Service","บริการ",`
   ${orbs}
   <div class="sv-l" data-a="s">
-        <img class="sv-badge" src="img/entech-badge-hex.webp" alt="Trusted by Entech Energy — Warranty & Service">
-    <div class="sv-shine2"></div>
+        <div class="sv-bw"><img class="sv-badge" src="img/entech-badge-hex.webp" alt="Trusted by Entech Energy — Warranty & Service"><div class="sv-shine3"></div></div>
   </div>
   <div class="sv-r">
     <h2 data-a style="--d:.06">ดูแลหลังการขาย <span class="g">โดยทีม Entech Energy</span></h2>
@@ -936,7 +944,7 @@ add("contact","ติดต่อเรา","ติดต่อ",`
   <div class="ct-in">
     <div class="ct-l"><img class="ct-logo" data-a="s" src="img/entech-logo-allw.png" alt="Entech Energy">
       <div class="ct-qr" data-a style="--d:.3"><div class="qr-tile"><img src="img/qr-catalog.png" alt="QR code แคตตาล็อก Entech Energy"><i class="qr-scan"></i></div>
-        <div class="qr-txt"><span class="qr-k">E-CATALOG</span><b>สแกนดู<br>ข้อมูลเพิ่มเติม</b><span>สถานีรูปแบบอื่น ๆ<br>พร้อมราคา</span></div></div></div>
+        <div class="qr-txt"><span class="qr-k">E-CATALOG</span><b>สแกนดู<br>ข้อมูลเพิ่มเติม</b><span>และสถานีรูปแบบอื่น ๆ</span></div></div></div>
     <div class="ct-r">
       <h2 data-a style="--d:.08">บริษัท เอ็นเทค เอเนอร์จี จำกัด</h2>
       <p class="ct-addr" data-a style="--d:.14">17/121 ซอยงามวงศ์วาน 47 แยก 48<br>แขวงทุ่งสองห้อง เขตหลักสี่ กรุงเทพฯ 10210</p>
@@ -1342,8 +1350,8 @@ const G=(function(){
       pts.forEach(p=>{ if(p.feed) add([[p.feed.world.x,p.feed.world.z],[p.feed.world.x,trench+.25],[p.world.x,trench+.25],[p.world.x,p.world.z]],.16,.85) });
     }
     // labels
-    const l1=label(`หม้อแปลง ${opt.tr} kVA`); l1.position.set(trX,3.4,yardZ); root.add(l1);
-    if(cabs.length){ const l2=label(`${MACH[cabKey].name} × ${cabs.length}`,`ตู้ไฟกลาง ${opt.st} kW`); l2.position.set((cabX(0)+cabX(cabs.length-1))/2,3.6,yardZ); root.add(l2) }
+    const l1=label(`หม้อแปลง ${opt.tr} kVA`); l1.position.set(trX,3.0,yardZ); root.add(l1);
+    if(cabs.length){ const l2=label(`${MACH[cabKey].name} × ${cabs.length}`,`ตู้ไฟกลาง ${opt.st} kW`); l2.position.set((cabX(0)+cabX(cabs.length-1))/2,5.4,yardZ); root.add(l2) }
     const l3=label(`${opt.st} kW · ${opt.o} หัว`,opt.cfg.length>28?opt.arch:opt.cfg); l3.position.set(0,7.3,rows===2?-.8:2.8); root.add(l3); root.userData.l3=l3; root.userData.labels=root.children.filter(o=>o.isSprite);
     // fit
     const x0=trX-2.5, x1=L/2+1.5, z0=rows===2?-8.5:-3.2, z1=7.2;
